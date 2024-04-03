@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Espacio de Arte</string>
+    <string name="texto_titulo_morelia">Morelia</string>
+    <string name="texto_titulo_catrina">Catrina Día de Muertos</string>
+    <string name="texto_titulo_cdmx">Calles de Ciudad de México</string>
+    <string name="texto_titulo_allende">San Miguel de Allende</string>
+    <string name="texto_anno_cdmx" >2021</string>
+    <string name="texto_anno_catrina">2018</string>
+    <string name="texto_anno_allende">2019</string>
+    <string name="texto_anno_morelia">2012</string>
+    <string name="texto_descripcion_cdmx">Imágen de la Ciudad de México</string>
+    <string name="texto_descripcion_morelia">Imágen de la Ciudad de Morelia</string>
+    <string name="texto_descripcion_catrina">Imágen de una catrina en el día de muertos</string>
+    <string name="texto_descripcion_allende">Imágen de la ciudad de San Miguel de Allende</string>
+</resources>
