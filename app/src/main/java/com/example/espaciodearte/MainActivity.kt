@@ -1,7 +1,6 @@
 package com.example.espaciodearte
 
 import android.os.Bundle
-import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
@@ -9,14 +8,16 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -67,17 +68,35 @@ fun AppEspacioArte(modifier: Modifier = Modifier) {
     var obraArte by remember { mutableStateOf(primero) }
 
     Column(
-        modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top
     ) {
-        VisualizadorObrasdeArte(modifier = Modifier.fillMaxWidth(), obraArte = obraArte)
-        Spacer(modifier = Modifier.size(10.dp))
-        TituloEspacioArte(titulo = titulo, anno = anno)
-        Spacer(modifier = Modifier.size(25.dp))
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(0.5f)
+                .padding(16.dp)
+        ) {
+            VisualizadorObrasdeArte(modifier = Modifier.fillMaxSize(), obraArte = obraArte)
+        }
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(0.2f)
+                .padding(top = 16.dp)
+        ) {
+            TituloEspacioArte(titulo = titulo, anno = anno)
+        }
+
         Row(
-            modifier = Modifier.padding(horizontal = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ){
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(0.3f)
+                .padding(top = 16.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
             Button(
                 onClick = {
                     obraArte = when (obraArte) {
@@ -102,15 +121,16 @@ fun AppEspacioArte(modifier: Modifier = Modifier) {
                             tercero
                         }
                     }
-                }
-            ){
+                },
+                modifier = Modifier.padding(horizontal = 8.dp)
+            ) {
                 Text(
                     text = "Anterior",
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = Color.Green
+                    fontWeight = FontWeight.Medium
                 )
             }
+
             Button(
                 onClick = {
                     obraArte = when (obraArte) {
@@ -135,19 +155,18 @@ fun AppEspacioArte(modifier: Modifier = Modifier) {
                             primero
                         }
                     }
-                }
-            ){
+                },
+                modifier = Modifier.padding(horizontal = 8.dp)
+            ) {
                 Text(
                     text = "Siguiente",
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = Color.Green
+                    fontWeight = FontWeight.Medium
                 )
             }
         }
     }
 }
-
 
 @Composable
 fun Modifier.buttonStyle(): Modifier {
@@ -164,12 +183,17 @@ fun VisualizadorObrasdeArte(
     modifier: Modifier = Modifier,
     @DrawableRes obraArte: Int
 ) {
-    Image(
-        painter = painterResource(obraArte),
-        contentDescription = null,
-        modifier = modifier,
-        contentScale = ContentScale.FillWidth
-    )
+    Card(
+        shape = RoundedCornerShape(8.dp),
+        modifier = modifier.fillMaxSize(),
+    ) {
+        Image(
+            painter = painterResource(obraArte),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.FillBounds
+        )
+    }
 }
 
 @Composable
@@ -177,21 +201,26 @@ fun TituloEspacioArte(
     @StringRes titulo: Int,
     @StringRes anno: Int
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = stringResource(id = titulo),
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFFFF6F00),
-            fontSize = 32.sp
-        )
-        Text(
-            text = stringResource(id = anno),
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color(0xFF212121)
-        )
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = stringResource(id = titulo),
+                fontWeight = FontWeight.Bold,
+                color = Color.DarkGray,
+                fontSize = 32.sp
+            )
+            Text(
+                text = stringResource(id = anno),
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color(0xFF212121)
+            )
+        }
     }
 }
 
